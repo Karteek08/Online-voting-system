@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NIT Silchar Gymkhana Elections</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🗳️</span>
+      <div>
+        <h1>NIT Silchar Gymkhana Elections</h1>
+        <p>Online Voting System</p>
+      </div>
+    </div>
+    <span id="statusBadge" class="badge">Loading…</span>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="student">Student</button>
+    <button class="tab" data-tab="results">Results</button>
+    <button class="tab" data-tab="admin">Admin</button>
+  </nav>
+
+  <main>
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- ================= STUDENT ================= -->
+    <section id="tab-student" class="panel">
+
+      <!-- Step 1: details -->
+      <div id="stepDetails" class="card">
+        <h2>Student login</h2>
+        <p class="hint">Use your college email in the format <code>firstname_ug_YY@branch.nits.ac.in</code>, e.g. <code>kattamuri_ug_24@cse.nits.ac.in</code></p>
+        <div class="grid2">
+          <label>First name<input id="firstName" autocomplete="off" placeholder="Kattamuri"></label>
+          <label>Second name<input id="secondName" autocomplete="off" placeholder="Surname"></label>
+        </div>
+        <label>Scholar ID<input id="scholarId" maxlength="7" inputmode="numeric" placeholder="2412058"></label>
+        <label>College email<input id="email" type="email" autocomplete="off" placeholder="kattamuri_ug_24@cse.nits.ac.in"></label>
+        <button id="btnSendOtp" class="primary">Send OTP</button>
+      </div>
+
+      <!-- Step 2: OTP -->
+      <div id="stepOtp" class="card hidden">
+        <h2>Verify OTP</h2>
+        <p class="hint" id="otpInfo"></p>
+        <div id="demoOtpBox" class="demo hidden">
+          <strong>Demo mode:</strong> no mail server is connected, so your OTP is shown here:
+          <span id="demoOtp"></span>
+        </div>
+        <label>Enter 6-digit OTP<input id="otpInput" maxlength="6" inputmode="numeric" placeholder="123456"></label>
+        <div class="row">
+          <button id="btnVerify" class="primary">Verify &amp; Login</button>
+          <button id="btnBack" class="ghost">Back</button>
+        </div>
+      </div>
+
+      <!-- Step 3: ballot -->
+      <div id="stepBallot" class="hidden">
+        <div class="card welcome">
+          <div>
+            <h2 id="welcomeName"></h2>
+            <p class="hint" id="welcomeMeta"></p>
+          </div>
+          <button id="btnLogout" class="ghost">Logout</button>
+        </div>
+        <div id="ballotNotice" class="notice hidden"></div>
+        <div id="ballot"></div>
+      </div>
+    </section>
+
+    <!-- ================= RESULTS ================= -->
+    <section id="tab-results" class="panel hidden">
+      <div class="card">
+        <h2>Election results</h2>
+        <div id="resultsBody"><p class="hint">Loading…</p></div>
+        <button id="btnRefreshResults" class="ghost">Refresh</button>
+      </div>
+    </section>
+
+    <!-- ================= ADMIN ================= -->
+    <section id="tab-admin" class="panel hidden">
+      <div id="adminLogin" class="card">
+        <h2>Election Commission login</h2>
+        <label>Admin password<input id="adminPw" type="password" placeholder="••••••••"></label>
+        <button id="btnAdminLogin" class="primary">Login</button>
+      </div>
+
+      <div id="adminPanel" class="hidden">
+        <div class="card">
+          <div class="row spread">
+            <h2>Election control</h2>
+            <button id="btnAdminLogout" class="ghost">Logout</button>
+          </div>
+          <div class="row">
+            <button id="btnStart" class="primary">Start election</button>
+            <button id="btnStop" class="danger">Stop election</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Add candidate</h2>
+          <p class="hint">Candidates can only be added before the election starts.</p>
+          <label>Post
+            <select id="candPost">
+              <option value="GS">Gymkhana Secretary (GS)</option>
+              <option value="VP">Vice President (VP)</option>
+              <option value="GSC">Secretary of Culture (GSC)</option>
+              <option value="GST">Secretary of Technical (GST)</option>
+              <option value="GSS">Secretary of Sports (GSS)</option>
+            </select>
+          </label>
+          <label>Candidate name<input id="candName" maxlength="60"></label>
+          <label>Manifesto (short)<textarea id="candManifesto" maxlength="150" rows="3"></textarea></label>
+          <button id="btnAddCand" class="primary">Add candidate</button>
+        </div>
+
+        <div class="card">
+          <div class="row spread">
+            <h2>Live tally</h2>
+            <button id="btnRefreshTally" class="ghost">Refresh</button>
+          </div>
+          <div id="tallyBody"><p class="hint">No data yet.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>NIT Silchar · Gymkhana Elections · OOP Project (C backend)</footer>
+  <script src="app.js"></script>
+</body>
+</html>
